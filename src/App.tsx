@@ -1,35 +1,84 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import "./App.css";
+import { useGetCountries } from "./Hooks/useGetCountries";
+import { columnHelper } from "./Utils/helpers";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { countries, isLoading, error } = useGetCountries();
+  console.log(countries);
 
+  const columns = [
+    columnHelper.accessor((row) => row.flag, {
+      id: "flag",
+      cell: (info) => <i>{info.getValue()}</i>,
+      header: () => <span>Flag</span>,
+    }),
+    columnHelper.accessor((row) => row.name.common, {
+      id: "name",
+      cell: (info) => <i>{info.getValue()}</i>,
+      header: () => <span>Name</span>,
+    }),
+    columnHelper.accessor((row) => row.population, {
+      id: "population",
+      cell: (info) => <i>{info.getValue()}</i>,
+      header: () => <span>Population</span>,
+    }),
+    columnHelper.accessor((row) => row.region, {
+      id: "region",
+      cell: (info) => <i>{info.getValue()}</i>,
+      header: () => <span>Region</span>,
+    }),
+    // columnHelper.accessor((row) => row.languages, {
+    //   id: "languages",
+    //   cell: (info) => <i>{info.getValue()}</i>,
+    //   header: () => <span>Languages</span>,
+    //   footer: (info) => info.column.id,
+    // }),
+  ];
+
+  const table = useReactTable({
+    data: isLoading ? [] : countries,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  })
+
+  if (error) {
+    return <>Failed to fetch data {error.message}</>;
+  }
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      Table:
+      <table>
+        <thead>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <tr key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
