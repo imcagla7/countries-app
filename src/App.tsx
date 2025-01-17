@@ -1,13 +1,17 @@
-import { useGetCountries } from "./Hooks/useGetCountries";
 import { columnHelper } from "./Utils/helpers";
 import Table from "./Components/Table";
 import { ColumnDef } from "@tanstack/react-table";
 import { Country } from "./Utils/types";
-import { TableWrapper } from "./styles";
+import { AppContainer } from "./styles";
+import SearchInput from "./Components/SearchInput";
+import { useState } from "react";
+import { useGetCountries } from "./Hooks/useGetCountries";
 
 function App() {
-  const { countries, isLoading, error } = useGetCountries();
-  console.log(countries);
+  const [searchQuery, setSearchQuery] = useState("");
+  const { countries, isLoading, error } = useGetCountries({
+    name: searchQuery,
+  });
 
   const columns = [
     columnHelper.accessor((row) => row.flag, {
@@ -35,10 +39,15 @@ function App() {
   if (error) {
     return <>Failed to fetch data {error.message}</>;
   }
+
   return (
-    <TableWrapper>
-      <Table data={isLoading ? [] : countries} columns={columns as ColumnDef<Country>[]} />
-    </TableWrapper>
+    <AppContainer>
+      <SearchInput setSearchQuery={setSearchQuery} />
+      <Table
+        data={isLoading ? [] : countries}
+        columns={columns as ColumnDef<Country>[]}
+      />
+    </AppContainer>
   );
 }
 
