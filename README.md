@@ -1,3 +1,31 @@
+# Countries App
+
+A React-based application that fetches and displays country data with features like sorting, searching, and pagination. This project uses styled-components for styling and includes unit tests with Jest and React Testing Library.
+
+## Features
+
+- Fetch and display country data from a REST API.
+- Debounced search functionality.
+- Supports sorting, filtering, and pagination.
+- Responsive and accessible UI built with styled-components.
+- Comprehensive unit tests for components and hooks.
+
+## Prerequisites
+
+Before setting up the project, make sure you have:
+
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
+
+## Installation
+
+1. Clone this repository: ```git clone https://github.com/imcagla7/countries-app.git```
+2. Install dependencies: ```npm install```
+3. To start the development server: ```npm run dev```
+3. Running tests: ```npm run test```
+
+
+  
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
