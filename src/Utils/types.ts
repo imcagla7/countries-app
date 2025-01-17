@@ -3,5 +3,4 @@ export type Country = {
   flag: string;
   population: number;
   region: string;
-  languages: string[];
 };

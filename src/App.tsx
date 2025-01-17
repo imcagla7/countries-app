@@ -1,7 +1,9 @@
-import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import "./App.css";
 import { useGetCountries } from "./Hooks/useGetCountries";
 import { columnHelper } from "./Utils/helpers";
+import Table from "./Components/Table";
+import { ColumnDef } from "@tanstack/react-table";
+import { Country } from "./Utils/types";
+import { TableWrapper } from "./styles";
 
 function App() {
   const { countries, isLoading, error } = useGetCountries();
@@ -28,56 +30,15 @@ function App() {
       cell: (info) => <i>{info.getValue()}</i>,
       header: () => <span>Region</span>,
     }),
-    // columnHelper.accessor((row) => row.languages, {
-    //   id: "languages",
-    //   cell: (info) => <i>{info.getValue()}</i>,
-    //   header: () => <span>Languages</span>,
-    //   footer: (info) => info.column.id,
-    // }),
   ];
-
-  const table = useReactTable({
-    data: isLoading ? [] : countries,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  })
 
   if (error) {
     return <>Failed to fetch data {error.message}</>;
   }
   return (
-    <>
-      Table:
-      <table>
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
+    <TableWrapper>
+      <Table data={isLoading ? [] : countries} columns={columns as ColumnDef<Country>[]} />
+    </TableWrapper>
   );
 }
 
