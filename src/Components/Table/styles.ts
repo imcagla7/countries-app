@@ -44,3 +44,41 @@ export const StyledTd = styled.td`
   padding: 12px;
   border: 1px solid #ddd;
 `;
+
+export const PaginationWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+export const PaginationButton = styled.button`
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #ffffff;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: #f1f1f1;
+  }
+`;
+
+export const PageInfo = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+`;
+
+export const PageSizeSelect = styled.select`
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  border-radius: 4px;
+`;
