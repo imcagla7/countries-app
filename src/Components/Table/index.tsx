@@ -19,6 +19,8 @@ import {
   PaginationButton,
   PageInfo,
   PageSizeSelect,
+  HeaderContainer,
+  SortIcon,
 } from "./styles";
 import { useState } from "react";
 
@@ -56,20 +58,22 @@ function Table<T>({ data, columns }: TableProps<T>): JSX.Element {
             <StyledTr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <StyledTh key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : (<div
-                        onClick={header.column.getToggleSortingHandler()}
-                      >
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                        {{
-                          asc: ' 🔼',
-                          desc: ' 🔽',
-                        }[header.column.getIsSorted() as string] ?? null}
-                      </div>)}
+                  {header.isPlaceholder ? null : (
+                    <HeaderContainer
+                      onClick={header.column.getToggleSortingHandler()}
+                    >
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                      {header.column.columnDef.enableSorting !== false && (
+                        <SortIcon $isSorted={header.column.getIsSorted() as "asc" | "desc"}>
+                          <span>▲</span>
+                          <span>▼</span>
+                        </SortIcon>
+                      )}
+                    </HeaderContainer>
+                  )}
                 </StyledTh>
               ))}
             </StyledTr>

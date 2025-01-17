@@ -12,7 +12,7 @@ export const StyledTable = styled.table`
 `;
 
 export const StyledThead = styled.thead`
-  background-color: #f4f4f4;
+  background-color: #ebebeb;
   &:hover {
     background-color: #cccccc;
     transition: background-color 0.3s ease;
@@ -81,4 +81,27 @@ export const PageSizeSelect = styled.select`
   border: 1px solid #ccc;
   padding: 0.5rem;
   border-radius: 4px;
+`;
+
+export const HeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+`;
+
+export const SortIcon = styled.span<{ $isSorted: "asc" | "desc" }>`
+font-size: 12px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+
+& > span {
+  transition: color 0.3s ease;
+  color: ${(props) => (props.$isSorted === "asc" ? "#000000" : "#fff")};
+  &:last-child {
+    color: ${(props) => (props.$isSorted === "desc" ? "#000000" : "#fff")};
+  }
+}
 `;

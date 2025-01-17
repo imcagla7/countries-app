@@ -19,13 +19,11 @@ function App() {
       cell: (info) => info.getValue(),
       header: () => <span>Flag</span>,
       enableSorting: false,
-      size: 20,
     }),
     columnHelper.accessor((row) => row.name.common, {
       id: "name",
       cell: (info) => info.getValue(),
       header: () => <span>Name</span>,
-      minSize: 300,
     }),
     columnHelper.accessor((row) => row.population, {
       id: "population",
