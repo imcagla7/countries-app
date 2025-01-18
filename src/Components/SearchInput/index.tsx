@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 import { SearchContainer, StyledInput } from "./styles";
 import { useDebounce } from "../../Hooks/useDebounce";
 
-interface SearchInputProps {
+type SearchInputProps = {
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({
-  setSearchQuery,
-}) => {
+function SearchInput({ setSearchQuery }: SearchInputProps): JSX.Element {
   const [value, setValue] = useState("");
   const debouncedValue = useDebounce(value);
 
@@ -26,6 +24,6 @@ const SearchInput: React.FC<SearchInputProps> = ({
       />
     </SearchContainer>
   );
-};
+}
 
 export default SearchInput;
