@@ -8,7 +8,7 @@ export function useGetCountries({ name }: { name?: string }) {
   const { data, error, isLoading } = useSWR(url);
 
   return {
-    countries: data,
+    countries: data ?? [],
     isLoading,
     error,
   };

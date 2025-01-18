@@ -2,7 +2,7 @@ import { columnHelper } from "./Utils/helpers";
 import Table from "./Components/Table";
 import { ColumnDef } from "@tanstack/react-table";
 import { Country } from "./Utils/types";
-import { AppContainer } from "./styles";
+import { AppContainer, ErrorMessage } from "./styles";
 import SearchInput from "./Components/SearchInput";
 import { useState } from "react";
 import { useGetCountries } from "./Hooks/useGetCountries";
@@ -37,17 +37,15 @@ function App() {
     }),
   ];
 
-  if (error) {
-    return <>Failed to fetch data {error.message}</>;
-  }
-
   return (
     <AppContainer>
+      {error ? <ErrorMessage>Failed to fetch data: {error.message}</ErrorMessage> : null}
       <SearchInput setSearchQuery={setSearchQuery} />
-      <Table
-        data={isLoading ? [] : countries}
-        columns={columns as ColumnDef<Country>[]}
-      />
+      {isLoading ? (
+        <p>Loading</p>
+      ) : (
+        <Table data={countries} columns={columns as ColumnDef<Country>[]} />
+      )}
     </AppContainer>
   );
 }
