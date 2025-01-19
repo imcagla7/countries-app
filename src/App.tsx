@@ -39,10 +39,11 @@ function App() {
 
   return (
     <AppContainer>
+      <h1>Country List</h1>
       {error ? <ErrorMessage>Failed to fetch data: {error.message}</ErrorMessage> : null}
       <SearchInput setSearchQuery={setSearchQuery} />
       {isLoading ? (
-        <p>Loading</p>
+        <p>Loading...</p>
       ) : (
         <Table data={countries} columns={columns as ColumnDef<Country>[]} />
       )}
