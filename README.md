@@ -2,6 +2,8 @@
 
 A React-based application that fetches and displays country data with features like sorting, searching, and pagination. This project uses styled-components for styling and includes unit tests with Jest and React Testing Library.
 
+Live link: https://countries-app-imcagla7.netlify.app/
+
 ## Features
 
 - Fetch and display country data from a REST API.
@@ -19,13 +21,11 @@ Before setting up the project, make sure you have:
 
 ## Installation
 
-1. Clone this repository: ```git clone https://github.com/imcagla7/countries-app.git```
-2. Install dependencies: ```npm install```
-3. To start the development server: ```npm run dev```
-3. Running tests: ```npm run test```
+1. Clone this repository: `git clone https://github.com/imcagla7/countries-app.git`
+2. Install dependencies: `npm install`
+3. To start the development server: `npm run dev`
+4. Running tests: `npm run test`
 
-
-  
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -46,11 +46,11 @@ export default tseslint.config({
   languageOptions: {
     // other options...
     parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
       tsconfigRootDir: import.meta.dirname,
     },
   },
-})
+});
 ```
 
 - Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
@@ -59,11 +59,11 @@ export default tseslint.config({
 
 ```js
 // eslint.config.js
-import react from 'eslint-plugin-react'
+import react from "eslint-plugin-react";
 
 export default tseslint.config({
   // Set the react version
-  settings: { react: { version: '18.3' } },
+  settings: { react: { version: "18.3" } },
   plugins: {
     // Add the react plugin
     react,
@@ -72,7 +72,7 @@ export default tseslint.config({
     // other rules...
     // Enable its recommended rules
     ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
+    ...react.configs["jsx-runtime"].rules,
   },
-})
+});
 ```
